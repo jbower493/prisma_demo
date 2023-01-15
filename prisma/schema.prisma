@@ -15,7 +15,7 @@ model post {
   published Boolean  @default(false)
   authorId  Int
   user      user     @relation(fields: [authorId], references: [id], onUpdate: Restrict, map: "post_ibfk_1")
-  tags      tag[]
+  tag       tag[]
 
   @@index([authorId], map: "authorId")
 }
@@ -36,7 +36,17 @@ model user {
 }
 
 model tag {
-  id    Int    @id @default(autoincrement())
-  name  String
-  posts post[]
+  id   Int    @id @default(autoincrement())
+  name String
+  post post[]
+}
+
+model category {
+  id   Int     @id @default(autoincrement())
+  name String? @db.VarChar(255)
+}
+
+model mate {
+  id   Int     @id @default(autoincrement())
+  name String? @db.VarChar(255)
 }
